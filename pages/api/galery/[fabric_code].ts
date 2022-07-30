@@ -1,9 +1,8 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import ClientBase from '../../lib/befeni-fabric-api-wrapper'
+import ClientBase from '@/lib/befeni-fabric-api-wrapper'
 
-import mockData from '../../mockInspirations.json'
+import mockData from '../../../mockInspirations.json'
 
 function timeout(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -28,7 +27,7 @@ export default async function handler(
   client.updateAccessTokenDirectly(visitorToken);
 
   // Retrieve the 'Boston' fabric
-  const fabric = await client.getFabric(10022);
+  const fabric = await client.getFabric(10124);
 
   console.log({ fabric });
 

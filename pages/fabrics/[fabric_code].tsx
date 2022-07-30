@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -9,7 +9,7 @@ import ReactStars from "react-rating-stars-component";
 import { Fade } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 
-import DesignInspirations from '../../components/DesignInspirations';
+import DesignInspirations from '@/components/DesignInspirations';
 
 type ImageData = {
   id: number,
@@ -84,16 +84,16 @@ const Fabrics = () => {
   console.log({ ...mainItem });
   
   return (
-    <div className='fabric w-full flex justify-center'>
+    <main className='fabric w-full flex justify-center'>
       <div className='container flex flex-col px-4 max-w-screen-xl relative'>
         <section className='fabric-content'>
           <div className='title flex my-6 justify-between'>
-            <h2 className='flex justify-between portrait:w-full landscape:space-x-2 landscape:lg:w-full text-2xl lg:text-4xl font-semibold'>
+            <h2 className='flex justify-between portrait:w-full landscape:space-x-2 landscape:lg:w-full text-3xl lg:text-4xl font-semibold'>
               <span>{mainItem.name}</span>
               <span>{fabric_code}</span>
             </h2>
 
-            <span className='hidden landscape:block landscape:lg:hidden'>
+            <span className='hidden landscape:flex items-center landscape:lg:hidden'>
               <a href="#desgin-inspirations">View desgin inspiration</a>
             </span>
           </div>
@@ -101,10 +101,10 @@ const Fabrics = () => {
           <div className='fabric-info flex flex-col landscape:flex-row lg:flex-row'>
             <div className='img-carousel w-full landscape:w-1/2 lg:w-1/2'>
               <Fade>
-                {mainItem.images.filter(img => img.variant === 'portrait').map((fadeImage, index) => (
+                {mainItem.images.filter(img => img.variant === 'portrait').map((fadeImage) => (
                   <div className="each-fade" key={fadeImage.id}>
                     <div className="image-container h-80 lg:h-full">
-                      <Image src={fadeImage.image_url} alt="Fabric image" className='object-cover h-[477px] w-full rounded-md' width={448} height={477} />
+                      <Image src={fadeImage.image_url} alt="Fabric image" className='object-cover h-[477px] w-full rounded-md' width={624} height={477} />
                     </div>
                   </div>
                 ))}
@@ -147,7 +147,7 @@ const Fabrics = () => {
           <DesignInspirations fabric_code={fabric_code} />
         </section>
       </div>
-    </div>
+    </main>
   )
 }
 

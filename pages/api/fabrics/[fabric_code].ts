@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import ClientBase from '../../lib/befeni-fabric-api-wrapper'
+import ClientBase from '@/lib/befeni-fabric-api-wrapper'
 
-import mockData from '../../mock.json'
+import mockData from '../../../mock.json'
 
 export default async function handler(
   req: NextApiRequest,

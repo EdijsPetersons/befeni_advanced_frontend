@@ -5,6 +5,11 @@ const nextConfig = {
   images: {
     domains: ["assets.befeni.de", "fra1.digitaloceanspaces.com"],
   },
+  experimental: {
+    images: {
+      allowFutureImage: true,
+    },
+  },
 }
 
 module.exports = nextConfig
