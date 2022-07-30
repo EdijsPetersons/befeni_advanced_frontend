@@ -3,7 +3,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import ClientBase from '../../lib/befeni-fabric-api-wrapper'
 
-import mockData from '../../mock.json'
+import mockData from '../../mockInspirations.json'
+
+function timeout(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function sleep(ms: number) {
+  await timeout(ms);
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,8 +31,9 @@ export default async function handler(
   const fabric = await client.getFabric(10022);
 
   console.log({ fabric });
-  
-  
+
+  await sleep(2000)
+
   res.status(200).json(mockData)
 }
 
