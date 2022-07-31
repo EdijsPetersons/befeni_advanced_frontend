@@ -22,7 +22,7 @@ type InspirationData = {
 }
 
 const getDesignInspirations = async (fabricCode: string, client: any) : Promise<InspirationData[]> => {
-  if (typeof fabricCode === 'undefined') {
+  if (typeof fabricCode === 'undefined' || fabricCode === '') {
     return Promise.reject(new Error('Invalid fabric code!'))
   }
 
@@ -43,10 +43,7 @@ const getDesignInspirations = async (fabricCode: string, client: any) : Promise<
 
 	const shirts = await client.getShirtGalleryShirts(filters, 'gallery_added_date', 'desc');
 
-	const shirtValues = shirts.getValues();
-
-  console.log(shirtValues );
-  
+	const shirtValues = shirts.getValues();  
   
   return shirtValues
 }
@@ -72,22 +69,23 @@ const DesignInspirations = ({ fabric_code }: DesignInspiration) => {
     )
   }
   
-  return (
+  return data.length > 0 ? (
     <section className='desgin-inspirations' id="desgin-inspirations">
       <hr className='mb-8 lg:mt-8'/>
       <h2 className='text-2xl text-center'>Design Inspirations</h2> 
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-8 gap-8'>
-        {data.map((item, index) => (
+        {data.map((item) => (
           <div key={item.id} className="w-full text-center">
             <Image src={item.shirtImages.find(variant => variant.size === 'mobile')!.image_url} alt={item.shirt_title} className='rounded-md' width={448} height={477}/>
             <p className='mt-4 text-xl font-semibold'>{item.shirt_title}</p>
-            <p className='mt-2'>{item.fabric_composition_label}</p>
+            {/**@ts-ignore*/}
+            <p className='mt-2'>{client.tt(item.fabric_composition_label)}</p>
             <button className='px-10 py-3.5 bg-slate-200 hover:bg-slate-300 rounded-full mt-4 text-slate-700'>Buy shirt</button>
           </div>
         ))}
       </div>
     </section>
-  )
+  ) : null
 }
 
 export default DesignInspirations

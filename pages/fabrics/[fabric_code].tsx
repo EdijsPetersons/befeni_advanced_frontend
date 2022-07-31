@@ -47,11 +47,11 @@ type FabricData = {
 }
 
 const getFabrics = async (fabricCode: string, client: any) : Promise<FabricData> => {
-  if (typeof fabricCode === 'undefined') {
+  if (typeof fabricCode === 'undefined' || fabricCode === '') {
     return Promise.reject(new Error('Invalid fabric code!'))
   }
   // Retrieve the 'Boston' fabric
-  const fabric = await client.getFabric(fabricCode);
+  const fabric = await client.getFabric(fabricCode);  
 
   return fabric
 
@@ -74,7 +74,7 @@ function shortenFabricID(fabricId:string) {
 	return fabricId;
 };
 
-function getFabricDetails(item:FabricData) {
+function getFabricDetails(item:FabricData, client: any) {
   let fabricCompositionLabelString = '';
 
   // @ts-ignore
@@ -91,10 +91,10 @@ function getFabricDetails(item:FabricData) {
   }
 
   const itemDetails = {
-    type: item.type,
-    material: fabricCompositionLabelString,
+    type: client.tt(item.type),
+    material: client.tt(fabricCompositionLabelString),
     webart: item.default_weave,
-    weight: fabricWeight
+    weight: client.tt(fabricWeight)
   }
 
   return itemDetails;
@@ -136,8 +136,6 @@ const Fabrics = () => {
   if (isError) {
     return <span>Error: {error.message}</span>
   }
-
-  console.log({ data });
   
   return (
     <main className='fabric w-full flex justify-center px-4'>
@@ -170,7 +168,7 @@ const Fabrics = () => {
             <div className='fabric-details w-full'>
               <table className="table-auto border border-collapse w-full text-left">
                 <tbody>
-                  {Object.entries(getFabricDetails(data)).map((field) => (
+                  {Object.entries(getFabricDetails(data, client)).map((field) => (
                     <tr key={field[0]} className="border-b even:bg-gray-50 odd:bg-white">
                       <th className="px-4 py-2 capitalize border-r">{field[0]}</th>
                       <td className="px-4 py-2">{field[1]}</td>

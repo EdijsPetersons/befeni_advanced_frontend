@@ -16,12 +16,12 @@ const Home: NextPage = () => {
           Welcome to Befeni
         </h1>
         <div className='flex flex-col mt-16 space-y-8 text-blue-500 underline'>
-          <Link href='/fabrics/124'>
+          <Link href='/fabrics/10124'>
             <a className='hover:text-blue-900'>
               View fabrics example 124
             </a>
           </Link>
-          <Link href='/fabrics/22'>
+          <Link href='/fabrics/10022'>
             <a className='hover:text-blue-900'>
               View fabrics example 22
             </a>
