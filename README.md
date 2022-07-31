@@ -23,3 +23,28 @@ npm start
 ```
 
 The app should now be up and running at http://localhost:3000
+
+## Extending the theme
+
+Project uses [tailwind CSS framework](https://tailwindcss.com/docs/theme) and the theme can be extened in `tailwind.config.js`.
+
+Example:
+
+```bash
+module.exports = {
+  theme: {
+    colors: {
+      transparent: 'transparent',
+      black: '#000',
+      white: '#fff',
+      gray: {
+        100: '#f7fafc',
+        // ...
+        900: '#1a202c',
+      },
+
+      // ...
+    }
+  }
+}
+```
